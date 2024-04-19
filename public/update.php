@@ -168,11 +168,11 @@ if(isset($_POST["product_id"]) && !empty($_POST["product_id"])){
                         </button>
                         
                         <!-- Modal -->
-                        <div class="modal fade" product_id="saveUpdateChangesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal fade" id="saveUpdateChangesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                         <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" product_id="exampleModalLongTitle">Confirmation</h5>
+                                <h5 class="modal-title" id="exampleModalLongTitle">Confirmation</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                                 </button>
