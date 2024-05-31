@@ -153,7 +153,7 @@
             document.getElementById('modalBody').innerHTML = `
                 <p>Name: ${title}</p>
                 <p>Price: ₱${price}</p>`;
-            document.getElementById('paymentLink').href = `it28-admin/pay_add/payment.php?productName=${encodeURIComponent(title)}&price=${encodeURIComponent(price)}`;
+            document.getElementById('paymentLink').href = `it28-admin/address/payment.php?productName=${encodeURIComponent(title)}&price=${encodeURIComponent(price)}`;
             $('#productModal').modal('show');
         }
 
