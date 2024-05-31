@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 29, 2024 at 11:45 AM
+-- Generation Time: May 30, 2024 at 04:08 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `rona`
+-- Database: `baslao`
 --
 
 -- --------------------------------------------------------
@@ -34,6 +34,7 @@ CREATE TABLE `addresses` (
   `state` varchar(100) NOT NULL,
   `postal_code` varchar(20) NOT NULL,
   `country` varchar(100) NOT NULL,
+  `payment_id` int(6) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -41,7 +42,7 @@ CREATE TABLE `addresses` (
 -- Dumping data for table `addresses`
 --
 
-INSERT INTO `addresses` (`id`, `street_address`, `city`, `state`, `postal_code`, `country`, `created_at`) VALUES
+INSERT INTO `addresses` (`id`, `street_address`, `city`, `state`, `postal_code`, `country`, `payment_id`, `created_at`) VALUES
 (1, 'kalanawan', 'none', 'mindanao', '2323', 'phillipines', '2024-05-29 09:44:32');
 
 -- --------------------------------------------------------
@@ -74,7 +75,7 @@ INSERT INTO `payments` (`id`, `product_name`, `price`, `payment_method`, `create
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `title` varchar(200) NOT NULL,
-  `description` text NOT NULL,
+  `description` varchar(255) NOT NULL,
   `price` decimal(10,0) NOT NULL,
   `rrp` decimal(10,0) NOT NULL DEFAULT 0,
   `quantity` int(11) NOT NULL,
@@ -93,6 +94,7 @@ INSERT INTO `products` (`id`, `title`, `description`, `price`, `rrp`, `quantity`
 (4, 'Americano', 'Espresso diluted with hot water.', 3, 4, 60, 'https://www.successmore.com.sg/113-superlarge_default/coffee-americano.jpg', '2024-05-08 00:00:00'),
 (5, 'Mocha', 'A chocolate-flavored variant of a caffe latte.', 5, 6, 20, 'https://firesidecoffee.com/cdn/shop/products/Fireside_Product_059.jpg?v=1571949121', '2024-05-08 00:00:00'),
 (6, 'Macchiato', 'An espresso coffee drink with a small amount of milk, usually foamed.', 4, 5, 20, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNBsFoEvPTD2MHZv9KPD-4DRDKWFoD9aA-YA&s', '2024-05-29 17:34:09');
+(5, 'Catcher\'s Gear Set', 'A complete set of catcher\'s gear for ultimate protection.', 150, 180, 15, 'https://th.bing.com/th/id/OIP.1tZmJLXOcg0FbePufoa-hwHaFQ?w=1536&h=1090&rs=1&pid=ImgDetMain', '2024-05-08 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -114,7 +116,6 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
 (1, 'admin', '$2y$10$kGp4g1TjBK4XwLIwRbBHSeZ4W5FpPbYoB1ap5NfFUjUPAcE3KR5QG', '2024-04-29 16:39:58'),
 (0, 'rona', '$2y$10$WBL8w6TxcRZg3QRfLJzkV.sOUiV7xxrzmKXkkKmuUCbM11NveCHD.', '2024-05-29 17:19:10');
-
 --
 -- Indexes for dumped tables
 --
@@ -123,18 +124,13 @@ INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
 -- Indexes for table `addresses`
 --
 ALTER TABLE `addresses`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `payment_id` (`payment_id`);
 
 --
 -- Indexes for table `payments`
 --
 ALTER TABLE `payments`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `products`
---
-ALTER TABLE `products`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -145,19 +141,23 @@ ALTER TABLE `products`
 -- AUTO_INCREMENT for table `addresses`
 --
 ALTER TABLE `addresses`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(6) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT for table `products`
+-- Constraints for dumped tables
 --
-ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- Constraints for table `addresses`
+--
+ALTER TABLE `addresses`
+  ADD CONSTRAINT `addresses_ibfk_1` FOREIGN KEY (`payment_id`) REFERENCES `payments` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
