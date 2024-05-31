@@ -42,7 +42,7 @@ CREATE TABLE `addresses` (
 -- Dumping data for table `addresses`
 --
 
-INSERT INTO `addresses` (`id`, `street_address`, `city`, `state`, `postal_code`, `country`, `payment_id`, `created_at`) VALUES
+INSERT INTO `addresses` (`id`, `street_address`, `city`, `state`, `postal_code`, `country`, `created_at`) VALUES
 (1, 'kalanawan', 'none', 'mindanao', '2323', 'phillipines', '2024-05-29 09:44:32');
 
 -- --------------------------------------------------------
@@ -64,7 +64,20 @@ CREATE TABLE `payments` (
 --
 
 INSERT INTO `payments` (`id`, `product_name`, `price`, `payment_method`, `created_at`) VALUES
-(1, 'latte', 5.00, 'PayMaya', '2024-05-29 09:44:11');
+(1, 'Softball Bat', 120.00, 'Credit Card', '2024-05-29 08:00:00'),
+(2, 'Softball Glove', 80.00, 'PayPal', '2024-05-29 09:00:00'),
+(3, 'Softballs Set', 40.00, 'Cash on Delivery', '2024-05-29 10:00:00'),
+(4, 'Batting Helmet', 60.00, 'Google Pay', '2024-05-29 11:00:00'),
+(5, 'Catcher\'s Gear Set', 150.00, 'Apple Pay', '2024-05-29 12:00:00'),
+(6, 'Softball Bat', 120.00, 'Credit Card', '2024-05-29 13:00:00'),
+(7, 'Softball Glove', 80.00, 'PayPal', '2024-05-29 14:00:00'),
+(8, 'Softballs Set', 40.00, 'Cash on Delivery', '2024-05-29 15:00:00'),
+(9, 'Batting Helmet', 60.00, 'Google Pay', '2024-05-29 16:00:00'),
+(10, 'Catcher\'s Gear Set', 150.00, 'Apple Pay', '2024-05-29 17:00:00'),
+(11, 'eweqweq', 321.00, 'PayMaya', '2024-05-30 12:39:37'),
+(12, 'eweqweq', 321.00, 'PayMaya', '2024-05-30 13:05:32'),
+(13, 'eweqweq', 321.00, 'PayMaya', '2024-05-30 14:04:23'),
+(14, 'softball gloves', 99999999.99, 'PayPal', '2024-05-30 14:04:45');
 
 -- --------------------------------------------------------
 
@@ -75,7 +88,7 @@ INSERT INTO `payments` (`id`, `product_name`, `price`, `payment_method`, `create
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
   `title` varchar(200) NOT NULL,
-  `description` varchar(255) NOT NULL,
+  `description` text NOT NULL,
   `price` decimal(10,0) NOT NULL,
   `rrp` decimal(10,0) NOT NULL DEFAULT 0,
   `quantity` int(11) NOT NULL,
@@ -87,6 +100,7 @@ CREATE TABLE `products` (
 -- Dumping data for table `products`
 --
 
+
 INSERT INTO `products` (`id`, `title`, `description`, `price`, `rrp`, `quantity`, `img`, `date_added`) VALUES
 (1, 'Espresso', 'A full-flavored, concentrated form of coffee served in small, strong shots.', 3, 4, 50, 'https://hips.hearstapps.com/vader-prod.s3.amazonaws.com/1668437637-41QXjrj0ccL._SL500_.jpg?crop=1xw:1xh;center,top&resize=980:*', '2024-05-08 00:00:00'),
 (2, 'Cappuccino', 'A coffee drink made with espresso and steamed milk foam.', 4, 5, 30, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCFih3N9gJgO3qXtDx6XfrDF2Ry1ZdVjuSaw&s', '2024-05-08 00:00:00'),
@@ -94,7 +108,6 @@ INSERT INTO `products` (`id`, `title`, `description`, `price`, `rrp`, `quantity`
 (4, 'Americano', 'Espresso diluted with hot water.', 3, 4, 60, 'https://www.successmore.com.sg/113-superlarge_default/coffee-americano.jpg', '2024-05-08 00:00:00'),
 (5, 'Mocha', 'A chocolate-flavored variant of a caffe latte.', 5, 6, 20, 'https://firesidecoffee.com/cdn/shop/products/Fireside_Product_059.jpg?v=1571949121', '2024-05-08 00:00:00'),
 (6, 'Macchiato', 'An espresso coffee drink with a small amount of milk, usually foamed.', 4, 5, 20, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNBsFoEvPTD2MHZv9KPD-4DRDKWFoD9aA-YA&s', '2024-05-29 17:34:09');
-(5, 'Catcher\'s Gear Set', 'A complete set of catcher\'s gear for ultimate protection.', 150, 180, 15, 'https://th.bing.com/th/id/OIP.1tZmJLXOcg0FbePufoa-hwHaFQ?w=1536&h=1090&rs=1&pid=ImgDetMain', '2024-05-08 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -113,9 +126,11 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
+
 INSERT INTO `users` (`id`, `username`, `password`, `created_at`) VALUES
 (1, 'admin', '$2y$10$kGp4g1TjBK4XwLIwRbBHSeZ4W5FpPbYoB1ap5NfFUjUPAcE3KR5QG', '2024-04-29 16:39:58'),
 (0, 'rona', '$2y$10$WBL8w6TxcRZg3QRfLJzkV.sOUiV7xxrzmKXkkKmuUCbM11NveCHD.', '2024-05-29 17:19:10');
+
 --
 -- Indexes for dumped tables
 --
